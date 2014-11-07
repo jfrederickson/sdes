@@ -32,16 +32,27 @@ public class SDES {
 	 * @param s the scanner to read from
 	 * @return a String containing the values read from the scanner 
 	 */
-	public static String getKey10(Scanner s) {
-		int left = 10;
-		StringBuilder result = new StringBuilder();
+	public static boolean[] getKey10(Scanner s) {
+		boolean[] result = new boolean[10];
+		String keyString = s.nextLine();
 		
-		while(left > 0 && s.hasNextInt()) {
-			result.append(s.nextInt());
-			left--;
+		if(keyString.length() != 10) {
+			System.err.println("Error: must input 10-bit key");
+			return null;
 		}
-		System.out.println(result.toString());
-		return result.toString();
+		
+		for(int i=0; i<10; i++) {
+			switch(keyString.charAt(i)) {
+				case '1': result[i] = true;
+				break;
+				case '0': result[i] = false;
+				break;
+				default: System.err.println("Invalid digit");
+				break;
+			}
+		}
+		System.out.println("Result: " + Arrays.toString(result));
+		return result;
 	}
 	
 	/**
@@ -177,7 +188,7 @@ public class SDES {
 		System.out.println(Integer.toBinaryString(bitArrayToByte(test)));
 		System.out.println(Arrays.toString(byteToBitArray(b)));
 		System.out.println(Arrays.toString(expPerm(test, new int[] {1, 3, 3, 3})));
-		Scanner sc = new Scanner("1234512345");
+		Scanner sc = new Scanner("1010101010");
 		getKey10(sc);
 	}
 }
