@@ -51,7 +51,6 @@ public class SDES {
 				break;
 			}
 		}
-		System.out.println("Result: " + Arrays.toString(result));
 		return result;
 	}
 	
